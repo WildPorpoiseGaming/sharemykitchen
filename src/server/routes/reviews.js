@@ -9,10 +9,10 @@ import {
 
 const router = express.Router()
 
-router.route(REVIEWS_INDEX, (req, res) => {})
-router.route(REVIEWS_SHOW, (req, res) => {})
-router.route(REVIEWS_CREATE, (req, res) => {})
-router.route(REVIEWS_UPDATE, (req, res) => {})
-router.route(REVIEWS_DELETE, (req, res) => {})
+router.route(REVIEWS_INDEX).get((req, res) => {})
+router.route(REVIEWS_SHOW).get((req, res) => {})
+router.route(REVIEWS_CREATE).post((req, res) => {})
+router.route(REVIEWS_UPDATE).put((req, res) => {})
+router.route(REVIEWS_DELETE).delete((req, res) => {})
 
 export default router

@@ -9,10 +9,10 @@ import {
 
 const router = express.Router()
 
-router.route(BOOKINGS_INDEX, (req, res) => {})
-router.route(BOOKINGS_SHOW, (req, res) => {})
-router.route(BOOKINGS_CREATE, (req, res) => {})
-router.route(BOOKINGS_UPDATE, (req, res) => {})
-router.route(BOOKINGS_DELETE, (req, res) => {})
+router.route(BOOKINGS_INDEX).get((req, res) => {})
+router.route(BOOKINGS_SHOW).get((req, res) => {})
+router.route(BOOKINGS_CREATE).post((req, res) => {})
+router.route(BOOKINGS_UPDATE).put((req, res) => {})
+router.route(BOOKINGS_DELETE).delete((req, res) => {})
 
 export default router
