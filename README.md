@@ -26,3 +26,10 @@ git fetch endpoint/tests/1
 git checkout endpoint/tests/1
 
 git checkout -b stutest
+
+When trying to bring in others work while already on their branch
+git stash
+git pull upstream endpoint/tests/1 --rebase
+git stash pop
+git add .
+git commit
