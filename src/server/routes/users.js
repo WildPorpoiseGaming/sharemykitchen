@@ -59,15 +59,14 @@ router.route(USERS_UPDATE).put((req, res, next) => {
   }
 
   UserModel
-    .findById(id)
+    .findByIdAndUpdate(
+      id, 
+      { $set: req.body }, 
+      { new: true }
+    )
     .then((user) => {
       if (user) {
-        Object.assign({}, user, req.body)
-        user
-          .save()
-          .then((updatedUser) => {
-            res.json(updatedUser)
-          })
+        res.json(user)
         return
       }
       res.sendStatus(404)

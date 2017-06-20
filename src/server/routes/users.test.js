@@ -101,9 +101,11 @@ describe('USERS', () => {
 
       request(server)
         .post(`/api${USERS_CREATE}`)
-        .field('name', name)
-        .field('guest', true)
-        .field('host', true)
+        .send({
+          name: name,
+          guest: true,
+          host: true,
+        })
         .expect(201)
         .then((response) => {
           expect(typeof response.body).toBe('object')
@@ -125,7 +127,9 @@ describe('USERS', () => {
       user.save().then((newUser) => {
         request(server)
           .put(`/api${usersUpdateRoute(newUser._id)}`)
-          .field('name', currname)
+          .send({
+            name: currname
+          })
           .expect(200)
           .then(done)
       })
@@ -142,11 +146,13 @@ describe('USERS', () => {
       user.save().then((newUser) => {
         request(server)
           .put(`/api${usersUpdateRoute(newUser._id)}`)
-          .field('name', currname)
+          .send({
+            name: currname
+          })
           .expect(200)
           .then((response) => {
             expect(typeof response.body).toBe('object')
-            expect(response.body.name).toBe(prevname)
+            expect(response.body.name).toBe(currname)
             done()
           })
       })
