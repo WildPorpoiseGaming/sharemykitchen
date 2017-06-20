@@ -10,6 +10,7 @@ import {
   usersUpdateRoute,
   usersDeleteRoute,
 } from '../../shared/routes'
+
 import UserModel from '../db/models/user'
 
 describe('USERS', () => {
@@ -102,7 +103,7 @@ describe('USERS', () => {
       request(server)
         .post(`/api${USERS_CREATE}`)
         .send({
-          name: name,
+          name,
           guest: true,
           host: true,
         })
@@ -128,7 +129,7 @@ describe('USERS', () => {
         request(server)
           .put(`/api${usersUpdateRoute(newUser._id)}`)
           .send({
-            name: currname
+            name: currname,
           })
           .expect(200)
           .then(done)
@@ -147,7 +148,7 @@ describe('USERS', () => {
         request(server)
           .put(`/api${usersUpdateRoute(newUser._id)}`)
           .send({
-            name: currname
+            name: currname,
           })
           .expect(200)
           .then((response) => {
