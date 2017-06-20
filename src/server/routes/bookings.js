@@ -1,6 +1,5 @@
 import express from 'express'
-
-import BookingModel from '../db/models/bookings'
+import mongoose from 'mongoose'
 
 import {
   BOOKINGS_INDEX,
@@ -9,46 +8,91 @@ import {
   BOOKINGS_UPDATE,
   BOOKINGS_DELETE,
 } from '../../shared/routes'
+import BookingModel from '../db/models/bookings'
 
 const router = express.Router()
 
-router.route(BOOKINGS_INDEX).get((req, res) => {
-  BookingModel.find({}, (data) => {
-    res.json(data)
-  },
-  )
+router.route(BOOKINGS_INDEX).get((req, res, next) => {
+  BookingModel
+    .find({})
+    .then((bookings) => {
+      res.json(bookings)
+    })
+    .catch(next)
 })
-router.route(BOOKINGS_SHOW).get((req, res) => {
-  const id = req.params.id
-  BookingModel.find({ id: id }, (data) => {
-    res.json(data)
-  })
+
+router.route(BOOKINGS_SHOW).get((req, res, next) => {
+  const { id } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.sendStatus(404)
+    return
+  }
+
+  BookingModel
+    .findById(id)
+    .then((booking) => {
+      if (booking) {
+        res.json(booking)
+        return
+      }
+      res.sendStatus(404)
+    })
+    .catch(next)
 })
-router.route(BOOKINGS_CREATE).post((req, res) => {
-  BookingModel.create(req.body, (data) => {
-    res.json(data)
-  })
+
+router.route(BOOKINGS_CREATE).post((req, res, next) => {
+  const booking = new BookingModel(req.body)
+
+  booking
+    .save()
+    .then((newBooking) => {
+      res.status(201).json(newBooking)
+    })
+    .catch(next)
 })
-router.route(BOOKINGS_UPDATE).put((req, res) => {
-  const id = req.params.id
-  BookingModel.findById(id, (err, booking) => {
-    if (err) {
-      res.status(500).send(err)
-    } else {
-      booking.listing_id = req.body.listing_id || booking.listing_id
-      booking.host_id = req.body.host_id || booking.host_id
-      booking.guest_id = req.body.guest_id || booking.guest_id
-      booking.rate = req.body.rate || booking.rate
-      booking.date = req.body.date || booking.date
-      booking.paid = req.body.paid || booking.paid
-    }
-  })
+router.route(BOOKINGS_UPDATE).put((req, res, next) => {
+  const { id } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.sendStatus(404)
+    return
+  }
+
+  BookingModel
+    .findById(id)
+    .then((booking) => {
+      if (booking) {
+        Object.assign({}, booking, req.body)
+        booking
+          .save()
+          .then((updatedBooking) => {
+            res.json(updatedBooking)
+          })
+      }
+      res.sendStatus(404)
+    })
+    .catch(next)
 })
-router.route(BOOKINGS_DELETE).delete((req, res) => {
-  const id = req.params.id
-  BookingModel.findByIdAndRemove(id, (data) => {
-    res.json(data)
-  })
+router.route(BOOKINGS_DELETE).delete((req, res, next) => {
+  const { id } = req.params
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.sendStatus(404)
+    return
+  }
+
+  BookingModel
+    .findById(id)
+    .then((booking) => {
+      if (booking) {
+        booking.remove()
+        .then((deletedBooking) => {
+          res.json(deletedBooking)
+        })
+        return
+      }
+      res.sendStatus(404)
+    })
+    .catch(next)
 })
 
 export default router
