@@ -12,8 +12,9 @@ const HomePage = () => {
           { property: 'og:title', content: APP_NAME },
         ]}
       />
-      <h3>Oven Type</h3>
+
       <form>
+        <h3>Oven Type</h3>
         <label>
           <input type="radio" name="stove" value="gas" />
         Gas Stove
@@ -26,9 +27,7 @@ const HomePage = () => {
         <input type="radio" name="oven" value="nopref" />
     No Preference
   </label>
-      </form>
-      <h3>Stove Type</h3>
-      <form>
+        <h3>Stove Type</h3>
         <label>
           <input type="radio" name="oven" value="gas" />
         Gas Oven
@@ -37,53 +36,47 @@ const HomePage = () => {
         <input type="radio" name="oven" value="electric" />
       Electric Oven
     </label>
-    <label>
-      <input type="radio" name="oven" value="nopref" />
+      <label>
+        <input type="radio" name="oven" value="nopref" />
     No Preference
   </label>
-      </form>
-      <h3>Mixer Type</h3>
-      <form>
+        <h3>Mixer Type</h3>
         <label>
-          <input type="radio" name="oven" value="kitchenaid" />
+          <input type="radio" name="mixer" value="kitchenaid" />
         Kitchen Aid Mixer
       </label>
-      <label>
-        <input type="radio" name="oven" value="other" />
+        <label>
+          <input type="radio" name="mixer" value="other" />
       Other
     </label>
-    <label>
-      <input type="radio" name="oven" value="nopref" />
+      <label>
+        <input type="radio" name="mixer" value="nopref" />
     No Preference
   </label>
-      </form>
-      <h3>Blender Type</h3>
-      <form>
+        <h3>Blender Type</h3>
         <label>
-          <input type="radio" name="oven" value="vitamix" />
+          <input type="radio" name="blender" value="vitamix" />
         Vitamix
       </label>
         <label>
-          <input type="radio" name="oven" value="other" />
+          <input type="radio" name="blender" value="other" />
       Other
     </label>
         <label>
-          <input type="radio" name="oven" value="nopref" />
+          <input type="radio" name="blender" value="nopref" />
     No Preference
   </label>
-      </form>
-      <h3>Refrigerator Type</h3>
-      <form>
+        <h3>Refrigerator Type</h3>
         <label>
-          <input type="radio" name="oven" value="stainless" />
+          <input type="radio" name="refrigerator" value="stainless" />
         Stainless Steel
       </label>
-      <label>
-        <input type="radio" name="oven" value="deepfreeze" />
+        <label>
+          <input type="radio" name="refrigerator" value="deepfreeze" />
       Deep Freeze
     </label>
-    <label>
-      <input type="radio" name="oven" value="nopref" />
+      <label>
+        <input type="radio" name="refrigerator" value="nopref" />
     No Preference
   </label>
       </form>
