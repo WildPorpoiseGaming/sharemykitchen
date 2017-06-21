@@ -16,6 +16,7 @@ router.route(BOOKINGS_INDEX).get((req, res, next) => {
   BookingModel
     .find({})
     .then((bookings) => {
+      console.log('bookings~~~~~', bookings)
       res.json(bookings)
     })
     .catch(next)

@@ -5,6 +5,7 @@ import Raven from 'raven'
 import './db/'
 
 import usersRoute from './routes/users'
+import bookingsRoute from './routes/bookings'
 import listingsRoute from './routes/listings'
 import routing from './routing'
 import { WEB_PORT, STATIC_PATH, RAVEN_PATH_SERVER } from '../shared/config'
@@ -22,7 +23,7 @@ app.use(compression())
 app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
-app.use('/api', usersRoute, listingsRoute)
+app.use('/api', usersRoute, bookingsRoute, listingsRoute)
 routing(app)
 
 /* eslint-disable no-console,no-unused-expressions,no-unused-vars */
