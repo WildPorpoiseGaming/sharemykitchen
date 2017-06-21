@@ -1,5 +1,4 @@
 import express from 'express'
-import mongoose from 'mongoose'
 
 import {
   REVIEWS_INDEX,
@@ -9,25 +8,28 @@ import {
   REVIEWS_DELETE,
 } from '../../shared/routes'
 
-import ReviewModel from '../db/models/review'
+import validateObjectId from '../middlewares/validateObjectId'
+import Booking from '../db/models/booking'
+import Review from '../db/models/review'
 
 const router = express.Router()
 
-router.route(REVIEWS_INDEX).get((req, res, next) => {
-  ReviewModel
-    .find({})
+router.get(REVIEWS_INDEX, (req, res, next) => {
+  const { host_id } = req.query
+  const query = Object.assign({}, host_id && { host_id })
+
+  Review
+    .find(query)
     .then((reviews) => {
       res.json(reviews)
     })
     .catch(next)
 })
 
-router.route(REVIEWS_SHOW).get((req, res, next) => {
+router.get(REVIEWS_SHOW, validateObjectId, (req, res, next) => {
   const { id } = req.params
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    res.send(404)
-  }
-  ReviewModel
+
+  Review
     .findById(id)
     .then((review) => {
       if (review) {
@@ -39,51 +41,52 @@ router.route(REVIEWS_SHOW).get((req, res, next) => {
     .catch(next)
 })
 
-router.route(REVIEWS_CREATE).post((req, res, next) => {
-  const review = new ReviewModel(req.body)
+router.post(REVIEWS_CREATE, (req, res, next) => {
+  const review = new Review(req.body)
 
-  review
-    .save()
-    .then((newReview) => {
-      res.status(201).json(newReview)
+  Booking
+    .findById(review.booking_id)
+    .then((booking) => {
+      if (booking.paid) {
+        review
+          .save()
+          .then((newReview) => {
+            res.status(201).json(newReview)
+          })
+        return
+      }
+      res.sendStatus(402)
     })
     .catch(next)
 })
 
-router.route(REVIEWS_UPDATE).put((req, res, next) => {
+router.put(REVIEWS_UPDATE, validateObjectId, (req, res, next) => {
   const { id } = req.params
-  if (!mongoose.types.ObjectId.isValid(id)) {
-    res.sendStatus(404)
-    return
-  }
 
-  ReviewModel
-    .findById(id)
+  Review
+    .findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      { new: true },
+    )
     .then((review) => {
       if (review) {
-        Object.assign({}, review, req.body)
-        review
-          .save()
-          .then((updatedReview) => {
-            res.json(updatedReview)
-          })
+        res.json(review)
+        return
       }
       res.sendStatus(404)
     })
     .catch(next)
 })
-router.route(REVIEWS_DELETE).delete((req, res, next) => {
-  const { id } = req.params
-  if (!mongoose.types.ObjectId.isValid(id)) {
-    res.sendStatus(404)
-    return
-  }
 
-  ReviewModel
+router.delete(REVIEWS_DELETE, validateObjectId, (req, res, next) => {
+  const { id } = req.params
+
+  Review
     .findById(id)
     .then((review) => {
       if (review) {
-        ReviewModel
+        Review
         .remove(id)
         .then((deletedReview) => {
           res.json(deletedReview)

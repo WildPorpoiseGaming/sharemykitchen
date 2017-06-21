@@ -10,6 +10,6 @@ const UserSchema = new Schema({
   host_info: Object,
 })
 
-const UserModel = mongoose.model('User', UserSchema)
+const User = mongoose.model('User', UserSchema)
 
-export default UserModel
+export default User

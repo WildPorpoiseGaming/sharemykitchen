@@ -9,12 +9,12 @@ import {
 } from '../../shared/routes'
 
 import validateObjectId from '../middlewares/validateObjectId'
-import UserModel from '../db/models/user'
+import User from '../db/models/user'
 
 const router = express.Router()
 
 router.get(USERS_INDEX, (req, res, next) => {
-  UserModel
+  User
     .find({})
     .then((users) => {
       res.json(users)
@@ -25,7 +25,7 @@ router.get(USERS_INDEX, (req, res, next) => {
 router.get(USERS_SHOW, validateObjectId, (req, res, next) => {
   const { id } = req.params
 
-  UserModel
+  User
     .findById(id)
     .then((user) => {
       if (user) {
@@ -38,7 +38,7 @@ router.get(USERS_SHOW, validateObjectId, (req, res, next) => {
 })
 
 router.post(USERS_CREATE, (req, res, next) => {
-  const user = new UserModel(req.body)
+  const user = new User(req.body)
 
   user
     .save()
@@ -51,7 +51,7 @@ router.post(USERS_CREATE, (req, res, next) => {
 router.put(USERS_UPDATE, validateObjectId, (req, res, next) => {
   const { id } = req.params
 
-  UserModel
+  User
     .findByIdAndUpdate(
       id,
       { $set: req.body },
@@ -70,7 +70,7 @@ router.put(USERS_UPDATE, validateObjectId, (req, res, next) => {
 router.delete(USERS_DELETE, validateObjectId, (req, res, next) => {
   const { id } = req.params
 
-  UserModel
+  User
     .findById(id)
     .then((user) => {
       if (user) {

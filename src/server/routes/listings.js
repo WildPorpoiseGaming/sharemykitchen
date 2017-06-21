@@ -1,3 +1,5 @@
+/* eslint-disable spaced-comment,no-param-reassign */
+
 import express from 'express'
 import mongoose from 'mongoose'
 import ListingsModel from '../db/models/listing'

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const ListingSchema = new Schema({
   name: String,
-  host_id: Number,
+  host_id: Schema.Types.ObjectId,
   address: String,
   rating: Number,
   pictures: Array,
@@ -13,6 +13,6 @@ const ListingSchema = new Schema({
   area: String,
 })
 
-const ListingModel = mongoose.model('Listing', ListingSchema)
+const Listing = mongoose.model('Listing', ListingSchema)
 
-export default ListingModel
+export default Listing

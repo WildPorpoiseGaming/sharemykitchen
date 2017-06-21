@@ -6,12 +6,12 @@ const ReviewSchema = new Schema({
   title: String,
   text: String,
   rating: Number,
-  listing_id: Number,
-  host_id: Number,
-  guest_id: Number,
-  booking_id: Number,
+  listing_id: Schema.Types.ObjectId,
+  host_id: Schema.Types.ObjectId,
+  guest_id: Schema.Types.ObjectId,
+  booking_id: Schema.Types.ObjectId,
 })
 
-const ReviewModel = mongoose.model('Review', ReviewSchema)
+const Review = mongoose.model('Review', ReviewSchema)
 
-export default ReviewModel
+export default Review

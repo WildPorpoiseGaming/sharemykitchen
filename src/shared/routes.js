@@ -44,6 +44,18 @@ export const usersDeleteRoute = (id) => {
   return `/users/${id || ':id'}`
 }
 
+export const reviewsShowRoute = (id) => {
+  return `/reviews/${id || ':id'}`
+}
+
+export const reviewsUpdateRoute = (id) => {
+  return `/reviews/${id || ':id'}`
+}
+
+export const reviewsDeleteRoute = (id) => {
+  return `/reviews/${id || ':id'}`
+}
+
 export const bookingsShowRoute = (id) => {
   return `/bookings/${id || ':id'}`
 }

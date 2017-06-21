@@ -4,9 +4,11 @@ import bodyParser from 'body-parser'
 import Raven from 'raven'
 import './db/'
 
-import usersRoute from './routes/users'
 import bookingsRoute from './routes/bookings'
 import listingsRoute from './routes/listings'
+import reviewsRoute from './routes/reviews'
+import usersRoute from './routes/users'
+
 import routing from './routing'
 import { WEB_PORT, STATIC_PATH, RAVEN_PATH_SERVER } from '../shared/config'
 import { currEnv } from '../shared/util'
@@ -23,7 +25,7 @@ app.use(compression())
 app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
-app.use('/api', usersRoute, bookingsRoute, listingsRoute)
+app.use('/api', bookingsRoute, listingsRoute, reviewsRoute, usersRoute)
 routing(app)
 
 /* eslint-disable no-console,no-unused-expressions,no-unused-vars */

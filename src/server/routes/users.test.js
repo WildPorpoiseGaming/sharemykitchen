@@ -11,18 +11,18 @@ import {
   usersDeleteRoute,
 } from '../../shared/routes'
 
-import UserModel from '../db/models/user'
+import User from '../db/models/user'
 
 describe('USERS', () => {
   let server
 
   beforeEach((done) => {
     server = app.listen(8001)
-    UserModel.remove({}).then(done)
+    User.remove({}).then(done)
   })
 
   afterEach((done) => {
-    UserModel.remove({}).then(done)
+    User.remove({}).then(done)
     server.close()
   })
 
@@ -40,7 +40,7 @@ describe('USERS', () => {
     })
 
     test('should return a single user', (done) => {
-      const user = new UserModel({
+      const user = new User({
         name: faker.name.findName(),
         guest: true,
         host: true,
@@ -63,7 +63,7 @@ describe('USERS', () => {
 
   describe(`GET ${usersShowRoute()}`, () => {
     test('should show a single user object', (done) => {
-      const user = new UserModel({
+      const user = new User({
         name: faker.name.findName(),
         guest: true,
         host: true,
@@ -121,7 +121,7 @@ describe('USERS', () => {
       const prevname = faker.name.findName()
       const currname = faker.name.findName()
 
-      const user = new UserModel({
+      const user = new User({
         name: prevname,
       })
 
@@ -140,7 +140,7 @@ describe('USERS', () => {
       const prevname = faker.name.findName()
       const currname = faker.name.findName()
 
-      const user = new UserModel({
+      const user = new User({
         name: prevname,
       })
 
@@ -176,7 +176,7 @@ describe('USERS', () => {
 
   describe(`DELETE ${usersDeleteRoute()}`, () => {
     test('should return 200 when delete is successful', (done) => {
-      const user = new UserModel()
+      const user = new User()
 
       user.save().then((newUser) => {
         request(server)
@@ -187,7 +187,7 @@ describe('USERS', () => {
     })
 
     test('should return the deleted user\'s id upon successful operation', (done) => {
-      const user = new UserModel()
+      const user = new User()
 
       user.save().then((newUser) => {
         request(server)

@@ -8,12 +8,12 @@ import {
   BOOKINGS_UPDATE,
   BOOKINGS_DELETE,
 } from '../../shared/routes'
-import BookingModel from '../db/models/bookings'
+import Booking from '../db/models/booking'
 
 const router = express.Router()
 
 router.route(BOOKINGS_INDEX).get((req, res, next) => {
-  BookingModel
+  Booking
     .find({})
     .then((bookings) => {
       console.log('bookings~~~~~', bookings)
@@ -29,7 +29,7 @@ router.route(BOOKINGS_SHOW).get((req, res, next) => {
     return
   }
 
-  BookingModel
+  Booking
     .findById(id)
     .then((booking) => {
       if (booking) {
@@ -42,7 +42,7 @@ router.route(BOOKINGS_SHOW).get((req, res, next) => {
 })
 
 router.route(BOOKINGS_CREATE).post((req, res, next) => {
-  const booking = new BookingModel(req.body)
+  const booking = new Booking(req.body)
 
   booking
     .save()
@@ -58,7 +58,7 @@ router.route(BOOKINGS_UPDATE).put((req, res, next) => {
     return
   }
 
-  BookingModel
+  Booking
     .findById(id)
     .then((booking) => {
       if (booking) {
@@ -81,7 +81,7 @@ router.route(BOOKINGS_DELETE).delete((req, res, next) => {
     return
   }
 
-  BookingModel
+  Booking
     .findById(id)
     .then((booking) => {
       if (booking) {
