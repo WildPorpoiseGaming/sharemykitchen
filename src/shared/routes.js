@@ -55,3 +55,15 @@ export const bookingsUpdateRoute = (id) => {
 export const bookingsDeleteRoute = (id) => {
   return `/bookings/${id || ':id'}`
 }
+
+export const listingsShowRoute = (id) => {
+  return `/listings/${id || ':id'}`
+}
+
+export const listingsUpdateRoute = (id) => {
+  return `/listings/${id || ':id'}`
+}
+
+export const listingsDeleteRoute = (id) => {
+  return `/listings/${id || ':id'}`
+}

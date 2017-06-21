@@ -1,3 +1,4 @@
+import {} from 'dotenv/config'
 import mongoose from 'mongoose'
 
 import { currEnv } from '../../shared/util'

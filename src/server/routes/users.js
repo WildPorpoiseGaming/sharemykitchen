@@ -1,5 +1,4 @@
 import express from 'express'
-import mongoose from 'mongoose'
 
 import {
   USERS_INDEX,
@@ -8,11 +7,13 @@ import {
   USERS_UPDATE,
   USERS_DELETE,
 } from '../../shared/routes'
+
+import validateObjectId from '../middlewares/validateObjectId'
 import UserModel from '../db/models/user'
 
 const router = express.Router()
 
-router.route(USERS_INDEX).get((req, res, next) => {
+router.get(USERS_INDEX, (req, res, next) => {
   UserModel
     .find({})
     .then((users) => {
@@ -21,12 +22,8 @@ router.route(USERS_INDEX).get((req, res, next) => {
     .catch(next)
 })
 
-router.route(USERS_SHOW).get((req, res, next) => {
+router.get(USERS_SHOW, validateObjectId, (req, res, next) => {
   const { id } = req.params
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    res.sendStatus(404)
-    return
-  }
 
   UserModel
     .findById(id)
@@ -40,7 +37,7 @@ router.route(USERS_SHOW).get((req, res, next) => {
     .catch(next)
 })
 
-router.route(USERS_CREATE).post((req, res, next) => {
+router.post(USERS_CREATE, (req, res, next) => {
   const user = new UserModel(req.body)
 
   user
@@ -51,23 +48,18 @@ router.route(USERS_CREATE).post((req, res, next) => {
     .catch(next)
 })
 
-router.route(USERS_UPDATE).put((req, res, next) => {
+router.put(USERS_UPDATE, validateObjectId, (req, res, next) => {
   const { id } = req.params
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    res.sendStatus(404)
-    return
-  }
 
   UserModel
-    .findById(id)
+    .findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      { new: true },
+    )
     .then((user) => {
       if (user) {
-        Object.assign({}, user, req.body)
-        user
-          .save()
-          .then((updatedUser) => {
-            res.json(updatedUser)
-          })
+        res.json(user)
         return
       }
       res.sendStatus(404)
@@ -75,12 +67,8 @@ router.route(USERS_UPDATE).put((req, res, next) => {
     .catch(next)
 })
 
-router.route(USERS_DELETE).delete((req, res, next) => {
+router.delete(USERS_DELETE, validateObjectId, (req, res, next) => {
   const { id } = req.params
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    res.sendStatus(404)
-    return
-  }
 
   UserModel
     .findById(id)
