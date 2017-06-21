@@ -167,7 +167,7 @@ const seedListings = [
   {
     'name': 'gravida non, sollicitudin a, malesuada id,',
     'host_id': 72,
-    'pictures': '{}',
+    'pictures': '[]',
     'features': {
         'refrigerator': 'black',
         'stove': 'electric',
@@ -185,7 +185,7 @@ const seedListings = [
   {
     'name': 'velit eu sem. Pellentesque ut ipsum',
     'host_id': 73,
-    'pictures': '{}',
+    'pictures': '[]',
     'features': {
         'refrigerator': 'black',
         'stove': 'electric',
@@ -203,7 +203,7 @@ const seedListings = [
   {
     'name': 'rutrum magna. Cras convallis convallis dolor.',
     'host_id': 89,
-    'pictures': '{}',
+    'pictures': '[]',
     'features': {
         'refrigerator': 'black',
         'stove': 'gas',
@@ -221,7 +221,7 @@ const seedListings = [
   {
     'name': 'lobortis, nisi nibh lacinia orci, consectetuer',
     'host_id': 82,
-    'pictures': '{}',
+    'pictures': '[]',
     'features': {
         'refrigerator': 'stainless',
         'stove': 'gas',
@@ -239,7 +239,7 @@ const seedListings = [
   {
     'name': 'ut cursus luctus, ipsum leo elementum',
     'host_id': 77,
-    'pictures': '{}',
+    'pictures': '[]',
     'features': {
         'refrigerator': 'stainless',
         'stove': 'gas',
@@ -257,7 +257,7 @@ const seedListings = [
   {
     'name': 'metus sit amet ante. Vivamus non',
     'host_id': 96,
-    'pictures': '{}',
+    'pictures': '[]',
     'features': {
         'refrigerator': 'stainless',
         'stove': 'electric',
@@ -275,7 +275,7 @@ const seedListings = [
   {
     'name': 'molestie arcu. Sed eu nibh vulputate',
     'host_id': 42,
-    'pictures': '{}',
+    'pictures': '[]',
     'features': {
         'refrigerator': 'stainless',
         'stove': 'gas',
@@ -293,7 +293,7 @@ const seedListings = [
   {
     'name': 'Vestibulum accumsan neque et nunc. Quisque',
     'host_id': 80,
-    'pictures': '{}',
+    'pictures': '[]',
     'features': {
         'refrigerator': 'stainless',
         'stove': 'gas',
@@ -311,7 +311,7 @@ const seedListings = [
   {
     'name': 'odio. Nam interdum enim non nisi.',
     'host_id': 39,
-    'pictures': '{}',
+    'pictures': '[]',
     'features': {
         'refrigerator': 'black',
         'stove': 'gas',
@@ -329,7 +329,7 @@ const seedListings = [
   {
     'name': 'luctus vulputate, nisi sem semper erat,',
     'host_id': 22,
-    'pictures': '{}',
+    'pictures': '[]',
     'features': {
         'refrigerator': 'black',
         'stove': 'electric',
