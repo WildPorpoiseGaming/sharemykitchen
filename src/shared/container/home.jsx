@@ -11,7 +11,12 @@ class Home extends React.Component {
     this.state = {
       startDate: null,
       endDate: null,
-      focusedInput: null
+      focusedInput: null,
+      stove: 'nopref',
+      oven: 'nopref',
+      mixer: 'nopref',
+      blender: 'nopref',
+      refrigerator: 'nopref',
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -19,7 +24,7 @@ class Home extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log("event", e);
+    console.log("event submitted", this.state);
   }
 
   onChange(e) {
@@ -118,6 +123,7 @@ class Home extends React.Component {
               </div>
             )
           })}
+          <button type="submit">Submit</button>
         </form>
       </div>
     )
