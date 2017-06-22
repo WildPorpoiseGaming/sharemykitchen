@@ -1,10 +1,11 @@
 import React from 'react'
 import Helmet from 'react-helmet'
+import { withRouter } from 'react-router'
 
 import { APP_NAME } from '../../config'
 import Home from '../../container/home'
 
-const HomePage = () => {
+const HomePage = (props) => {
   return (
     <div>
       <Helmet
@@ -13,9 +14,9 @@ const HomePage = () => {
           { property: 'og:title', content: APP_NAME },
         ]}
       />
-      <Home />
+      <Home history={props.history}/>
     </div>
   )
 }
 
-export default HomePage
+export default withRouter(HomePage)

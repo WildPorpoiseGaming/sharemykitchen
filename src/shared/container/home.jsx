@@ -1,43 +1,51 @@
-import React from "react";
+import React from 'react'
 import {
   DateRangePicker,
-  SingleDatePicker,
-  DayPickerRangeController
-} from "react-dates";
+  // SingleDatePicker,
+  // DayPickerRangeController,
+} from 'react-dates'
+import querystring from 'querystring'
+
 
 class Home extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       startDate: null,
       endDate: null,
       focusedInput: null,
-      stove: 'nopref',
-      oven: 'nopref',
-      mixer: 'nopref',
-      blender: 'nopref',
-      refrigerator: 'nopref',
-    };
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+      stove: '',
+      oven: '',
+      mixer: '',
+      blender: '',
+      refrigerator: '',
+    }
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
   onSubmit(e) {
-    e.preventDefault();
-    console.log("event submitted", this.state);
+    e.preventDefault()
+    const qsObj = {
+      ...this.state,
+      endDate: this.state.endDate && this.state.endDate.toString(),
+      startDate: this.state.startDate && this.state.startDate.toString(),
+      focusedInput: '',
+    }
+    const qs = querystring.stringify(qsObj)
+    this.props.history.push({
+      pathname: '/listings',
+      search: `?${qs}`,
+    })
   }
 
   onChange(e) {
-    console.log("event name", e.target.name);
-    console.log("event value", e.target.value);
-    console.log("event", e);
     this.setState({
       [e.target.name]: e.target.value
-    });
+    })
   }
 
   render() {
-    console.log("state", this.state);
     return (
       <div>
         <form onSubmit={this.onSubmit}>
@@ -52,56 +60,56 @@ class Home extends React.Component {
           />
           {[
             {
-              header: "Stove Type",
+              header: 'Stove Type',
               children: [
-                { name: "stove", label: "Gas Stove", value: "gas" },
-                { name: "stove", label: "Electric Stove", value: "electric" },
-                { name: "stove", label: "No Preference", value: "nopref" }
-              ]
+                { name: 'stove', label: 'Gas Stove', value: 'gas' },
+                { name: 'stove', label: 'Electric Stove', value: 'electric' },
+                { name: 'stove', label: 'No Preference', value: '' },
+              ],
             },
             {
-              header: "Oven Type",
+              header: 'Oven Type',
               children: [
-                { name: "oven", label: "Gas Oven", value: "gas" },
-                { name: "oven", label: "Electric Oven", value: "electric" },
-                { name: "oven", label: "No Preference", value: "nopref" }
-              ]
+                { name: 'oven', label: 'Gas Oven', value: 'gas' },
+                { name: 'oven', label: 'Electric Oven', value: 'electric' },
+                { name: 'oven', label: 'No Preference', value: '' },
+              ],
             },
             {
-              header: "Mixer Type",
+              header: 'Mixer Type',
               children: [
-                { name: "mixer", label: "KitchenAid", value: "kitchenaid" },
-                { name: "mixer", label: "Other Mixer", value: "other" },
-                { name: "mixer", label: "No Preference", value: "nopref" }
-              ]
+                { name: 'mixer', label: 'KitchenAid', value: 'kitchenaid' },
+                { name: 'mixer', label: 'Other Mixer', value: 'other' },
+                { name: 'mixer', label: 'No Preference', value: '' },
+              ],
             },
             {
-              header: "Blender Type",
+              header: 'Blender Type',
               children: [
-                { name: "blender", label: "Vitamix Blender", value: "vitamix" },
-                { name: "blender", label: "Other Blender", value: "other" },
-                { name: "blender", label: "No Preference", value: "nopref" }
-              ]
+                { name: 'blender', label: 'Vitamix Blender', value: 'vitamix' },
+                { name: 'blender', label: 'Other Blender', value: 'other' },
+                { name: 'blender', label: 'No Preference', value: '' },
+              ],
             },
             {
-              header: "Refrigerator Type",
+              header: 'Refrigerator Type',
               children: [
                 {
-                  name: "refrigerator",
-                  label: "Stainless Steel Refrigerator",
-                  value: "stainless"
+                  name: 'refrigerator',
+                  label: 'Stainless Steel Refrigerator',
+                  value: 'stainless',
                 },
                 {
-                  name: "refrigerator",
-                  label: "Black Refrigerator",
-                  value: "black"
+                  name: 'refrigerator',
+                  label: 'Black Refrigerator',
+                  value: 'black',
                 },
                 {
-                  name: "refrigerator",
-                  label: "No Preference",
-                  value: "nopref"
-                }
-              ]
+                  name: 'refrigerator',
+                  label: 'No Preference',
+                  value: '',
+                },
+              ],
             },
           ].map((feature, i) => {
             return (
@@ -130,4 +138,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Home
