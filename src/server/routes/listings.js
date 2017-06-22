@@ -15,8 +15,18 @@ import {
 const router = express.Router()
 
 router.route(LISTINGS_INDEX).get((req, res, next) => {
+  const qs = req.query
+  const features = Object.assign(
+      {},
+      qs.oven && qs.oven.length && { 'features.oven': qs.oven },
+      qs.stove && qs.stove.length && { 'features.stove': qs.stove },
+      qs.mixer && qs.mixer.length && { 'features.mixer': qs.mixer },
+      qs.blender && qs.blender.length && { 'features.blender': qs.blender },
+      qs.refrigerator && qs.refrigerator.length && { 'features.refrigerator': qs.refrigerator },
+    )
+
   ListingsModel
-    .find({})
+    .find(features)
     .then((listings) => {
       res.json(listings)
     })
@@ -44,9 +54,7 @@ router.route(LISTINGS_SHOW).get((req, res, next) => {
 })
 
 router.route(LISTINGS_CREATE).post((req, res, next) => {
-  
   const listing = new ListingsModel(req.body)
-
   listing
     .save()
     .then((newListing) => {
@@ -56,18 +64,16 @@ router.route(LISTINGS_CREATE).post((req, res, next) => {
 })
 
 router.route(LISTINGS_UPDATE).put((req, res, next) => {
-  
   const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)) {
     res.sendStatus(404)
     return
   }
-
   ListingsModel
     .findByIdAndUpdate(
-      id, 
-      { $set: req.body }, 
-      { new: true }
+      id,
+      { $set: req.body },
+      { new: true },
     )
     .then((listing) => {
       if (listing) {

@@ -19,7 +19,8 @@
     "test": "yarn lint && jest",
     "test:local": "export NODE_ENV=testing && jest --verbose",
     "precommit": "yarn test",
-    "prepush": "yarn test && yarn prod:build"
+    "prepush": "yarn test && yarn prod:build",
+    "seed-database": "babel-node seed.js"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

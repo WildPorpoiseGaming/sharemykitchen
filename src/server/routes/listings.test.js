@@ -46,7 +46,7 @@ describe('LISTINGS', () => {
         host_id: 6,
         address: '221B Baker St.',
         rating: 8,
-        pictures: ['jpeg','jpeg'],
+        pictures: ['jpeg', 'jpeg'],
         features: ['over', 'blender'],
         rate: 100,
         area: 'Westminster',
@@ -79,14 +79,13 @@ describe('LISTINGS', () => {
         host_id: 6,
         address: '221B Baker St.',
         rating: 8,
-        pictures: ['jpeg','jpeg'],
+        pictures: ['jpeg', 'jpeg'],
         features: ['over', 'blender'],
         rate: 100,
         area: 'Westminster',
       })
 
       listing.save().then((newListing) => {
-
         request(server)
           .get(`/api${listingsShowRoute(newListing._id)}`)
           .expect(200)
@@ -115,13 +114,12 @@ describe('LISTINGS', () => {
 
   describe(`POST ${LISTINGS_CREATE}`, () => {
     test('should return the created listing\'s id', (done) => {
-      
       const listing = new ListingModel({
         name: 'Kitchen 1',
         host_id: 6,
         address: '221B Baker St.',
         rating: 8,
-        pictures: ['jpeg','jpeg'],
+        pictures: ['jpeg', 'jpeg'],
         features: ['over', 'blender'],
         rate: 100,
         area: 'Westminster',
@@ -141,21 +139,18 @@ describe('LISTINGS', () => {
 
   describe(`PUT ${listingsUpdateRoute()}`, () => {
     test('should return 200 when update is successful', (done) => {
-
       const listing = new ListingModel({
         name: 'Kitchen 1',
         host_id: 6,
         address: '221B Baker St.',
         rating: 8,
-        pictures: ['jpeg','jpeg'],
+        pictures: ['jpeg', 'jpeg'],
         features: ['over', 'blender'],
         rate: 100,
         area: 'Westminster',
       })
 
-      const prevname = listing.name
       const currname = 'Super awesome kitch'
-
 
       listing.save().then((newListing) => {
         request(server)
@@ -172,13 +167,12 @@ describe('LISTINGS', () => {
         host_id: 6,
         address: '221B Baker St.',
         rating: 8,
-        pictures: ['jpeg','jpeg'],
+        pictures: ['jpeg', 'jpeg'],
         features: ['over', 'blender'],
         rate: 100,
         area: 'Westminster',
       })
 
-      const prevname = listing.name
       const currname = 'Super awesome kitch'
 
       listing.save().then((newListing) => {
