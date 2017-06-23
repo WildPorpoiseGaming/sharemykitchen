@@ -17,8 +17,18 @@ import {
 const router = express.Router()
 
 router.route(LISTINGS_INDEX).get((req, res, next) => {
+  const qs = req.query
+  const features = Object.assign(
+      {},
+      qs.oven && qs.oven.length && { 'features.oven': qs.oven },
+      qs.stove && qs.stove.length && { 'features.stove': qs.stove },
+      qs.mixer && qs.mixer.length && { 'features.mixer': qs.mixer },
+      qs.blender && qs.blender.length && { 'features.blender': qs.blender },
+      qs.refrigerator && qs.refrigerator.length && { 'features.refrigerator': qs.refrigerator },
+    )
+
   Listing
-    .find({})
+    .find(features)
     .then((listings) => {
       res.json(listings)
     })
@@ -47,7 +57,6 @@ router.route(LISTINGS_SHOW).get((req, res, next) => {
 
 router.route(LISTINGS_CREATE).post((req, res, next) => {
   const listing = new Listing(req.body)
-
   listing
     .save()
     .then((newListing) => {
@@ -62,7 +71,7 @@ router.route(LISTINGS_UPDATE).put((req, res, next) => {
     res.sendStatus(404)
     return
   }
-
+  
   Listing
     .findByIdAndUpdate(
       id,

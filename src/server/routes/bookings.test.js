@@ -13,7 +13,6 @@ import {
   bookingsShowRoute,
   bookingsUpdateRoute,
   bookingsDeleteRoute,
-
 } from '../../shared/routes'
 
 const request = supertest.agent(app.listen())
