@@ -55,14 +55,9 @@ router.route(LISTINGS_SHOW).get((req, res, next) => {
     .catch(next)
 })
 
-<<<<<<< HEAD
-router.route(LISTINGS_CREATE).post((req, res, next) => {
-  const listing = new Listing(req.body)
-=======
 router.post(LISTINGS_CREATE, authRequired, (req, res, next) => {
   const listing = new Listing(Object.assign({}, req.body, { host_id: req.user._id }))
 
->>>>>>> bece04711aed42ce688f6b53e19ae7677eded1f4
   listing
     .save()
     .then((newListing) => {
@@ -77,7 +72,7 @@ router.route(LISTINGS_UPDATE).put((req, res, next) => {
     res.sendStatus(404)
     return
   }
-  
+
   Listing
     .findByIdAndUpdate(
       id,

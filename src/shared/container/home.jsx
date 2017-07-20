@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-import {
-  DateRangePicker,
-  // SingleDatePicker,
-  // DayPickerRangeController,
-} from 'react-dates'
-import querystring from 'querystring'
-
-=======
 /* eslint-disable react/no-array-index-key */
 
 import React from 'react'
@@ -35,7 +25,6 @@ const featureSelectColors = [
     WebkitTextFillColor: 'black',
   },
 ]
->>>>>>> bece04711aed42ce688f6b53e19ae7677eded1f4
 
 class Home extends React.Component {
   constructor(props) {

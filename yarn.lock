@@ -47,13 +47,10 @@ acorn@^5.0.0, acorn@^5.0.1:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.0.3.tgz#c460df08491463f028ccb82eab3730bf01087b3d"
 
-<<<<<<< HEAD
-=======
 after@0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
 
->>>>>>> bece04711aed42ce688f6b53e19ae7677eded1f4
 airbnb-prop-types@^2.5.4, airbnb-prop-types@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/airbnb-prop-types/-/airbnb-prop-types-2.6.1.tgz#6a0ed725a13bd0f77f54c9bfdc4174085b59d8d6"
