@@ -2,7 +2,7 @@ import supertest from 'supertest'
 import faker from 'faker'
 import mongoose from 'mongoose'
 
-import app from '../'
+import authApp from '../utils/auth-app'
 import Booking from '../db/models/booking'
 import Listing from '../db/models/listing'
 import User from '../db/models/user'
@@ -15,7 +15,7 @@ import {
   bookingsDeleteRoute,
 } from '../../shared/routes'
 
-const request = supertest.agent(app.listen())
+const request = supertest.agent(authApp.listen())
 
 describe('BOOKINGS', () => {
   describe(`GET ${BOOKINGS_INDEX}`, () => {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import {
   DateRangePicker,
@@ -6,6 +7,35 @@ import {
 } from 'react-dates'
 import querystring from 'querystring'
 
+=======
+/* eslint-disable react/no-array-index-key */
+
+import React from 'react'
+import PropTypes from 'prop-types'
+import { DateRangePicker } from 'react-dates'
+import querystring from 'querystring'
+
+import { FEATURE_TYPES } from '../config'
+import HomePageCarousel from '../component/home-page-carousel'
+
+const featureSelectColors = [
+  { background: '#5764c6',
+    WebkitTextFillColor: 'black',
+  },
+  { background: '#32b643',
+    WebkitTextFillColor: 'black',
+  },
+  { background: '#ffb700',
+    WebkitTextFillColor: 'black',
+  },
+  { background: '#e85600',
+    WebkitTextFillColor: 'black',
+  },
+  { background: '#727e96',
+    WebkitTextFillColor: 'black',
+  },
+]
+>>>>>>> bece04711aed42ce688f6b53e19ae7677eded1f4
 
 class Home extends React.Component {
   constructor(props) {
@@ -41,12 +71,17 @@ class Home extends React.Component {
 
   onChange(e) {
     this.setState({
+<<<<<<< HEAD
       [e.target.name]: e.target.value
+=======
+      [e.target.name]: e.target.value,
+>>>>>>> bece04711aed42ce688f6b53e19ae7677eded1f4
     })
   }
 
   render() {
     return (
+<<<<<<< HEAD
       <div>
         <form onSubmit={this.onSubmit}>
           <h3> Pick Your Dates </h3>
@@ -133,9 +168,74 @@ class Home extends React.Component {
           })}
           <button type="submit">Submit</button>
         </form>
+=======
+      <div className="container">
+        <div className="columns">
+          <div className="col-12 text-center">
+            <form onSubmit={this.onSubmit}>
+              <HomePageCarousel />
+              <p>Share My Kitchen is a place where foodies and entertainers can
+              make their spaces and tools available to like-minded individuals.
+              </p>
+              <p>Looking for a kitchen to use for your next event or project?<br />
+              Scroll down to customize your search.<br />
+              Interested in advertising your fabulous space?<br />
+              Click the host button above to get started!
+              </p>
+              <div className="divider" />
+              <h4> Pick your dates: </h4>
+              <DateRangePicker
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                onDatesChange={({ startDate, endDate }) => {
+                  this.setState({ startDate, endDate })
+                }}
+                focusedInput={this.state.focusedInput}
+                onFocusChange={(focusedInput) => {
+                  this.setState({ focusedInput })
+                }}
+              />
+              <div className="divider" />
+              <h4> Pick your features: </h4>
+              <div className="container">
+                <div className="columns">
+                  {FEATURE_TYPES.map((feature, i) => {
+                    return (
+                      <div key={i} className="col-2 centered card" style={featureSelectColors[i]}>
+                        <h5 className="card-header">{feature.type}</h5>
+                        {feature.children.map((child, j) => {
+                          return (
+                            <label className="centered card-body" key={j} htmlFor={child.name}>
+                              <input
+                                type="radio"
+                                name={child.name}
+                                value={child.value}
+                                onChange={this.onChange}
+                              />
+                              {child.label}
+                            </label>
+                          )
+                        })}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+              <button className="btn btn-lg" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+>>>>>>> bece04711aed42ce688f6b53e19ae7677eded1f4
       </div>
     )
   }
 }
 
+<<<<<<< HEAD
+=======
+Home.propTypes = {
+  history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+}
+
+>>>>>>> bece04711aed42ce688f6b53e19ae7677eded1f4
 export default Home
